@@ -1,20 +1,13 @@
 package com.example.mateusz_klusek_sm_zadanie_3;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.os.Bundle;
-
-import java.util.UUID;
-
-public class MainActivity extends SingleFragmentAcctivity {
-    @Override
-    protected Fragment createFragment() {
-        UUID taskId = (UUID) getIntent().getSerializableExtra(TaskListFragment.KEY_EXTRA_TASK_ID);
-        return TaskFragment.newInstance(taskId);
-    }
-/*
+public abstract class SingleFragmentAcctivity extends AppCompatActivity {
+    protected abstract Fragment createFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,10 +16,11 @@ public class MainActivity extends SingleFragmentAcctivity {
         Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
 
         if (fragment == null) {
-            fragment = new TaskFragment();
+            //fragment = new TaskFragment();
+            fragment = createFragment();
             fragmentManager.beginTransaction()
                     .add(R.id.fragment_container, fragment)
                     .commit();
         }
-    }*/
+    }
 }
